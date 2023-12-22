@@ -25,7 +25,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        BookingSubject system = new BookingSubject();
+        system = BookingSubject.getInstance();
 
         primaryStage.setTitle("TravelSDU");
 
