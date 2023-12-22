@@ -3,25 +3,36 @@ package Proj3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingSubject implements Subject{
-    List<Observer> observers = new ArrayList<>();
-    @Override
-    public void registerObserver(Observer observer) {
+public class BookingSubject {
+    private static BookingSubject instance;
+    private List<BookingObserver> observers;
+
+    private BookingSubject() {
+        observers = new ArrayList<>();
+    }
+
+    public static BookingSubject getInstance() {
+        if (instance == null) {
+            instance = new BookingSubject();
+        }
+        return instance;
+    }
+
+    public void registerObserver(BookingObserver observer) {
         observers.add(observer);
     }
 
-    @Override
-    public void removeObserver(Observer observer) {
+    public void removeObserver(BookingObserver observer) {
         observers.remove(observer);
     }
 
-    @Override
     public void notifyObservers() {
-        for (Observer o: observers) {
-            o.update();
+        for (BookingObserver observer : observers) {
+            observer.update();
         }
     }
-    public void bookingMade(){
+
+    public void bookingMade() {
         notifyObservers();
     }
 }
